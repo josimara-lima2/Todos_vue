@@ -11,7 +11,7 @@
             "
           >
             <div class="flex items-center justify-center mr-2">
-              <button class="text-gray-400">
+              <button @click="onCheckClick" :class="{'text-green-600':isCompleted, 'text-gray-400':!isCompleted}">
                 <svg
                   class="w-5 h-5"
                   fill="none"
@@ -32,8 +32,9 @@
             <div class="w-full">
               <input
                 type="text"
+              
                 placeholder="Digite a sua tarefa"
-                :value="todo.title"
+              v-model="title"
                 class="
                   bg-gray-300
                   placeholder-gray-500
@@ -46,6 +47,7 @@
                   leading-normal
                   mr-3
                 "
+                @keyup.enter="onTitleChange"
               />
             </div>
 
@@ -81,6 +83,37 @@
                 type: Object,
                 default:() => {}
             }
+        },
+        data(){
+         return{
+          title: this.todo.title,
+          isCompleted: this.todo.completed
+          }
+        },
+        methods:{
+          onTitleChange(){
+           
+            if(!this.title){
+              return
+            }
+           
+            this.updateTodo()
+          },
+          updateTodo(){
+            const payload = {
+              id: this.todo.id,
+              data:{
+                title:this.title,
+                completed: this.isCompleted
+              }
+
+            }
+            this.$store.dispatch('updateTodo',payload)
+          },
+          onCheckClick(){
+            this.isCompleted = !this.isCompleted
+            this.updateTodo()
+          }
         }
     }
 </script>
