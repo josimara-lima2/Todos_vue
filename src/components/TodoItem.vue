@@ -77,46 +77,59 @@
 </template>
 
 <script>
+  import { ref } from 'vue'
+  import { useStore } from 'vuex'
     export default{
-        props:{
+      props:{
             todo:{
                 type: Object,
                 default:() => {}
             }
         },
-        data(){
-         return{
-          title: this.todo.title,
-          isCompleted: this.todo.completed
-          }
-        },
-        methods:{
-          onTitleChange(){
-           
-            if(!this.title){
-              return
-            }
-           
-            this.updateTodo()
-          },
-          updateTodo(){
+      setup(props){
+        const title = ref(props.todo.title)
+        const isCompleted= ref(props.todo.completed) 
+        const store = useStore()
+
+       const updateTodo = () =>{
             const payload = {
-              id: this.todo.id,
+              id: props.todo.id,
               data:{
-                title:this.title,
-                completed: this.isCompleted
+                title:title.value,
+                completed: isCompleted.value
               }
 
             }
-            this.$store.dispatch('updateTodo',payload)
-          },
-          onCheckClick(){
-            this.isCompleted = !this.isCompleted
-            this.updateTodo()
-          },
-          onDelete(){
-            this.$store.dispatch('deleteTodo', this.todo.id)
-          }
+          store.dispatch('updateTodo',payload)
         }
+       const onCheckClick = () =>{
+            isCompleted.value = !isCompleted.value
+           updateTodo()
+          }
+
+        const onTitleChange = () =>{  
+           if(!title.value){
+             return
+           }
+          
+           updateTodo()
+         }
+
+        const onDelete = () =>{
+           store.dispatch('deleteTodo', props.todo.id)
+          }
+
+        return{
+          title,
+          isCompleted,
+          onTitleChange,
+          onDelete, 
+          onCheckClick
+         
+        }
+      },
+       
+     
+      
     }
 </script>
