@@ -1,49 +1,19 @@
 {
   "todos": [
     {
-      "title": "Estudar javascriptdd",
-      "completed": true,
+      "title": "terafa1",
+      "completed": false,
       "id": 1
     },
     {
-      "title": "Estudar Vue",
-      "completed": true,
+      "title": "tarefa 2",
+      "completed": false,
       "id": 2
     },
     {
-      "title": "Estudar composition API",
-      "completed": true,
-      "id": 3
-    },
-    {
       "title": "teste",
-      "completed": true,
-      "id": 4
-    },
-    {
-      "title": "testando",
       "completed": false,
-      "id": 5
-    },
-    {
-      "title": "sfsf",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "title": "ccccccc",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "title": "rfgg",
-      "completed": false,
-      "id": 8
-    },
-    {
-      "title": "rtg",
-      "completed": false,
-      "id": 9
+      "id": 3
     }
   ]
 }
